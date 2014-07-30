@@ -29,7 +29,7 @@ unless node['auto-patch']['prep']['disable']
   if node['auto-patch']['prep']['weekly']
     node.set['auto-patch']['prep']['day'] = '*'
     node.set['auto-patch']['prep']['month'] = '*'
-    node.set['auto-patch']['prep']['weekday'] = AutoPatch.weekday(node['auto-patch']['prep']['weekly'])
+    node.set['auto-patch']['prep']['weekday'] = AutoPatch.weekday(node['auto-patch']['prep']['weekly']).to_s
     Chef::Log.info("Auto patch prep scheduled weekly on #{node['auto-patch']['weekly']} at #{node['auto-patch']['prep']['hour']}:#{node['auto-patch']['prep']['minute']}")
   elsif node['auto-patch']['prep']['monthly']
     next_date = AutoPatch.next_monthly_date(
@@ -67,7 +67,7 @@ unless node['auto-patch']['disable']
   if node['auto-patch']['weekly']
     node.set['auto-patch']['day'] = '*'
     node.set['auto-patch']['month'] = '*'
-    node.set['auto-patch']['weekday'] = AutoPatch.weekday(node['auto-patch']['weekly'])
+    node.set['auto-patch']['weekday'] = AutoPatch.weekday(node['auto-patch']['weekly']).to_s
     Chef::Log.info("Auto patch scheduled weekly on #{node['auto-patch']['weekly']} at #{node['auto-patch']['hour']}:#{node['auto-patch']['minute']}")
   elsif node['auto-patch']['monthly']
     next_date = AutoPatch.next_monthly_date(
